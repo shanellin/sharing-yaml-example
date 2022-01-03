@@ -1,0 +1,56 @@
+# YAML 測試檔
+
+# 1. 使用 冒號結構 的表示為對象，如：key: value。
+provider:
+ name: aws
+ runtime: nodejs12.x
+ region: ap-east-1
+
+# 2. 以 - 加一個空白 開頭的表示為陣列。 
+ value:
+  - name
+  - is
+  - value
+  - object: object
+ other:
+  -
+   NODE_ENV: production
+   APP_ENV: dev
+
+# 3. | 表示每行的縮進和換行都會保留。
+ line1: |
+  我是第一行
+  我是第二行
+    我是第三行
+      我是第四行
+  我是第五行
+  
+# 4. > 表示只有空白行才會視為換行，原來的換行都視為空格。
+ line2: >
+  我是第一行
+  我也是第一行
+  我仍是第一行
+  
+  我是第二行
+  我也是第二行
+  
+# 5. 重複引用，使用 & 做為希望被重複引用的錨點，搭配 * 取用對應錨點，如：&defaults、*defaults。
+ defaults: &defaults
+  adapter: postgres
+  host: localhost
+ development:
+  database: myapp_development
+  <<: *defaults
+
+# 6. 使用 ? 配合 : 表示一個對象的複雜 key 值。
+ ? 
+  - Create
+  - Update
+ :
+  time: 2021-01-03
+  
+# 7. 類型轉換，支持使用嚴格類型標籤 !!。
+ type1: !!int "666"
+ type2: !!float "666.66"
+ type3: !!str 666.66
+ type4: !!str true
